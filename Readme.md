@@ -1,4 +1,4 @@
-Android-Studio docker container
+Android Docker Image for React Native and Android Studio
 ============
 Complete Android-Studio in a Docker container.
 You can even start an Emulator inside it.
@@ -7,10 +7,10 @@ If you don't have a display the Emulator can run with a "dummy" display - perfec
 
 Tested on Linux only.
 
-Building without docker compose
+Building
 -------------
-Just run "./build.sh", or "docker build -t deadolus/android-studio ." directly.
-An already built version is also on Docker Hub. So you may also run "docker pull deadolus/android-studio".
+Just run "./build.sh" directly.
+An already built version is also on Docker Hub. So you may also run "docker pull 21m4tw/android-studio-react-native".
 You may of course change the name of the container.
 
 Running without docker compose
@@ -21,7 +21,7 @@ Run
 
 or run directly via
 
-"docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev deadolus/android-studio"
+"docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev 21m4tw/android-studio-react-native"
 
 
 run.sh has some options which you can set via Environment variables.
@@ -38,29 +38,3 @@ The default docker entrypoint tries to start android-studio.
 So it probably does not make sense to try starting via run.sh without
 HOST_DISPLAY=1.
 If you just want a shell in the container, without starting Android Studio, run "./run.sh bash" to bypass starting Android Studio
-
-Running and Building with docker compose:
--------------
-
-1. Comment/uncomment the appropriate lines in the compose.yaml depending on if you are running this natively in linux or in WSL.
-2. To build: `docker compose build android_emulator`
-3. To run: `docker compose run android_emulator`
-
-
-
-Additional information - continous integration
--------------
-I included a script under provisioning/ndkTests.sh which demonstrates how you may use this container in a CI environment.
-The script starts a headless container, if the HOSTNAME variable is set to CI.
-It then changes in to a directory (workspace/GoogleTestApp) where it builds and installs an app.
-It parses logcat for lines containing a string (GoogleTest), uninstalls the app and does some analysis on the parsed lines.
-While this script probably does not make much sense FOR YOU, it might be useful as a guiding point for you.
-
-Contributors
-------------
-[@Deadolus](https://github.com/Deadolus)  
-[@guilhermelinhares](https://github.com/guilhermelinhares)  
-[@mtomcanyi](https://github.com/mtomcanyi)  
-[@Naveenkhegde](https://github.com/Naveenkhegde)  
-[@BenBlumer](https://github.com/BenBlumer)
-

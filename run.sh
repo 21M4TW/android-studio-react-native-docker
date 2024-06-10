@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ANDROID_GNSS_PATH_DEFAULT="/home/embuser/aosp-docker/_gnss_hal/"
 ANDROID_GNSS_PATH=${ANDROID_GNSS_PATH:-$ANDROID_GNSS_PATH_DEFAULT}
 AOSP_ARGS=""
@@ -18,9 +20,4 @@ AOSP_ARGS="${AOSP_ARGS} --env=DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix"
 fi
 
 #Make sure prerequisite directories exist in studio-data dir
-mkdir -p studio-data/profile/AndroidStudio2022.3.1.20
-mkdir -p studio-data/profile/android
-mkdir -p studio-data/profile/gradle
-mkdir -p studio-data/profile/java
-docker volume create --name=android_studio
-docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data -v android_studio:/androidstudio-data --privileged --group-add plugdev deadolus/android-studio $@
+docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev 21M4TW/android-studio-react-native-docker
