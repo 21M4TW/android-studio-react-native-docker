@@ -108,9 +108,18 @@ RUN cd ${ANDROID_HOME} && wget "$ANDROID_STUDIO_URL" -O android_studio.tar.gz &&
 ENV ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
 COPY provisioning/docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
-COPY provisioning/android_env.sh ${ANDROID_HOME}/android_env.sh
 COPY provisioning/init.sh /usr/local/bin/init.sh
 RUN chmod +x /usr/local/bin/*
 COPY provisioning/51-android.rules /etc/udev/rules.d/51-android.rules
+
+ARG ANDROID_HOME=/studio-data/Android
+ARG ANDROID_SDK_ROOT=$ANDROID_HOME
+ARG CMAKE_BIN_PATH=$ANDROID_HOME/cmake/$CMAKE_VERSION/bin
+ARG PATH=$CMAKE_BIN_PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH
+
+RUN echo "ANDROID_HOME=$ANDROID_HOME" > /etc/environment
+RUN echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> /etc/environment
+RUN echo "CMAKE_BIN_PATH=$CMAKE_BIN_PATH" >> /etc/environment
+RUN echo "PATH=$PATH" >> /etc/environment
 
 ENTRYPOINT [ "/usr/local/bin/docker_entrypoint.sh" ]

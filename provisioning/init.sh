@@ -1,10 +1,22 @@
 #!/bin/bash
 
-source /opt/android/android_env.sh
+if [ ! -d /studio-data ]; then
+	exit
+fi
+
+export VUID=`stat -c '%u' /studio-data`
+export VGID=`stat -c '%g' /studio-data`
+export USER=android
+
+if [ "$VUID" != "0" ]; then
+	export HOME=/home/android
+else
+	export HOME=/root
+fi
 
 if [ "$VUID" != "0" ]; then
 	groupadd -g $VGID -r $USER
-	useradd -u $VUID -g $VGID --create-home -r $USER
+	useradd -u $VUID -g $VGID -s /bin/bash --create-home -r $USER
 
 	adduser $USER libvirt
 	adduser $USER kvm
