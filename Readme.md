@@ -10,7 +10,7 @@ Tested on Linux only.
 Building
 -------------
 Just run "./build.sh" directly.
-An already built version is also on Docker Hub. So you may also run "docker pull 21m4tw/android-studio-react-native".
+An already built version is also on Docker Hub. So you may also run "docker pull 21M4TW/android-studio-react-native".
 You may of course change the name of the container.
 
 Running without docker compose
@@ -21,7 +21,7 @@ Run
 
 or run directly via
 
-"docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev 21m4tw/android-studio-react-native"
+"docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data --privileged --group-add plugdev 21M4TW/android-studio-react-native"
 
 
 run.sh has some options which you can set via Environment variables.

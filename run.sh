@@ -20,4 +20,4 @@ AOSP_ARGS="${AOSP_ARGS} --env=DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix"
 fi
 
 #Make sure prerequisite directories exist in studio-data dir
-docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data $@ --privileged --group-add plugdev 21M4TW/android-studio-react-native-docker
+docker run -i $AOSP_ARGS -v `pwd`/studio-data:/studio-data $@ --privileged --group-add plugdev 21M4TW/android-studio-react-native
